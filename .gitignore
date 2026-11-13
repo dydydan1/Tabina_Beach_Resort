@@ -1,0 +1,13 @@
+# Dependencies
+node_modules
+
+# Build output
+dist
+dist-ssr
+
+# Local
+.env
+.env.local
+.DS_Store
+.tmp
+*.local
