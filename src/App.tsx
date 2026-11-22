@@ -8,6 +8,7 @@ import { GallerySection } from "./components/GallerySection";
 import { WhyChooseUsSection } from "./components/WhyChooseUsSection";
 import { TestimonialsSection } from "./components/TestimonialsSection";
 import { ContactSection, type InquiryPreset } from "./components/ContactSection";
+import { OwnerSection } from "./components/OwnerSection";
 import { Footer } from "./components/Footer";
 
 export default function App() {
@@ -27,6 +28,7 @@ export default function App() {
       <main id="main">
         <HeroSection />
         <AboutSection />
+        <OwnerSection />
         <FacilitiesSection />
         <CottageRatesSection onInquire={handleCottageInquiry} />
         <GallerySection />

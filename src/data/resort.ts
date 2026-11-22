@@ -3,6 +3,7 @@ export type NavLink = { label: string; href: string; id: string };
 export const navLinks: NavLink[] = [
   { label: "Home", href: "#home", id: "home" },
   { label: "About", href: "#about", id: "about" },
+  { label: "Our Story", href: "#owners", id: "owners" },
   { label: "Facilities", href: "#facilities", id: "facilities" },
   { label: "Cottages & Rates", href: "#cottages", id: "cottages" },
   { label: "Gallery", href: "#gallery", id: "gallery" },
@@ -297,11 +298,72 @@ export const testimonials: Testimonial[] = [
   },
 ];
 
+export type Owner = {
+  name: string;
+  role: string;
+  photo: string;
+  photoAlt: string;
+  quote: string;
+  story: string[];
+  highlights?: string[];
+};
+
+export const owners: Owner[] = [
+  {
+    name: "Owner Name One",
+    role: "Founder & Visionary",
+    photo: "/images/owner-1.jpg",
+    photoAlt: "Placeholder — replace with a portrait of the first owner",
+    quote: "We didn't build a resort. We simply let the spring do what it was always meant to do.",
+    story: [
+      "This paragraph is a placeholder for the first owner's story. Share how they discovered this land, what made them fall in love with the spring, and what inspired the idea of turning it into a place for others to enjoy.",
+      "Talk about the early days — the challenges, the vision, and the deep personal connection to this corner of the land that made it all worth building.",
+    ],
+    highlights: [
+      "Planted the first trees along the spring trail",
+      "Designed the original pool layout around the natural rock",
+      "Still personally greets guests every weekend",
+    ],
+  },
+  {
+    name: "Owner Name Two",
+    role: "Co-Founder & Operations",
+    photo: "/images/owner-2.jpg",
+    photoAlt: "Placeholder — replace with a portrait of the second owner",
+    quote: "Every cottage, every path, every table was placed with one question in mind: will families feel at home here?",
+    story: [
+      "This paragraph is a placeholder for the second owner's story. Describe their role in bringing the resort to life — perhaps the practical side: building the cottages, designing the spaces, managing the day-to-day experience.",
+      "Include personal moments that show their character — a detail about how they made sure even the smallest things, like the picnic tables and shade trees, were done with care.",
+    ],
+    highlights: [
+      "Oversaw construction of every cottage by hand",
+      "Established the resort's open-door kitchen policy",
+      "Runs the team that keeps the grounds spotless daily",
+    ],
+  },
+  {
+    name: "Owner Name Three",
+    role: "Co-Founder & Guest Experience",
+    photo: "/images/owner-3.jpg",
+    photoAlt: "Placeholder — replace with a portrait of the third owner",
+    quote: "When guests leave with wet hair and big smiles, we know we've done our job right.",
+    story: [
+      "This paragraph is a placeholder for the third owner's story. Highlight their focus on the people side of the resort — the warm welcome, the relationships with returning guests, and the culture of genuine hospitality they've built.",
+      "Perhaps share a favorite memory of a family who came back year after year, or how the resort became a tradition for different communities around the region.",
+    ],
+    highlights: [
+      "Built lasting relationships with hundreds of returning families",
+      "Introduced the resort's group and reunion booking program",
+      "Personally responds to every inquiry and guest message",
+    ],
+  },
+];
+
 export const contactDetails = {
   addressLines: ["Spring Resort Road, Barangay Placeholder", "Municipality, Province, Philippines"],
   phone: "+63 900 000 0000",
   phoneHref: "tel:+639000000000",
-  email: "hello@tabinaspringresort.example",
+  email: "dyann.razonado.5@gmail.com",
   emailHref: "mailto:hello@tabinaspringresort.example",
   facebookLabel: "facebook.com/tabinaspringresort",
   facebookHref: "https://www.facebook.com/",

@@ -2378,3 +2378,198 @@ p {
     transform: none;
   }
 }
+
+/* 16. Owner's Story -------------------------------------------------------- */
+.owners {
+  /* inherits section--sand padding */
+}
+
+.owner-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 1.8vw, 1.5rem);
+  margin-bottom: clamp(2.4rem, 4vw, 3.4rem);
+}
+
+/* Card */
+.owner-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease), border-color 0.45s var(--ease);
+}
+
+.owner-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(23, 77, 53, 0.24);
+  box-shadow: var(--shadow-md);
+}
+
+/* Photo */
+.owner-card__media {
+  position: relative;
+  aspect-ratio: 3 / 3.5;
+  overflow: hidden;
+  background: var(--mist-soft);
+  flex-shrink: 0;
+}
+
+.owner-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.9s var(--ease);
+}
+
+.owner-card:hover .owner-card__media img {
+  transform: scale(1.05);
+}
+
+/* Role badge overlaid on the photo */
+.owner-card__role-badge {
+  position: absolute;
+  left: 0.9rem;
+  bottom: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.38rem 0.75rem 0.38rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.93);
+  backdrop-filter: blur(6px);
+  color: var(--forest);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.owner-card__role-badge svg {
+  color: var(--emerald);
+  flex-shrink: 0;
+}
+
+/* Text body */
+.owner-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  flex: 1;
+  padding: 1.5rem 1.4rem 1.6rem;
+}
+
+.owner-card__name {
+  font-size: 1.3rem;
+  color: var(--forest);
+  line-height: 1.2;
+}
+
+.owner-card__quote {
+  margin: 0;
+  padding: 0.8rem 1rem;
+  border-left: 3px solid var(--water);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  background: var(--mist-soft);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--forest);
+}
+
+.owner-card__story {
+  display: grid;
+  gap: 0.6rem;
+}
+
+/* Highlight bullet list */
+.owner-card__highlights {
+  display: grid;
+  gap: 0.45rem;
+  margin-top: 0.3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+
+.owner-card__highlights li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--charcoal-soft);
+}
+
+.owner-card__highlight-dot {
+  display: block;
+  width: 6px;
+  height: 6px;
+  margin-top: 0.42em;
+  border-radius: 50%;
+  background: var(--water);
+  flex-shrink: 0;
+}
+
+/* CTA strip at the bottom of the section */
+.owners__cta-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding: clamp(1.4rem, 2.5vw, 1.9rem) clamp(1.4rem, 2.8vw, 2.2rem);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+}
+
+.owners__cta-left {
+  flex: 1;
+  min-width: 200px;
+}
+
+.owners__cta-text {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
+  line-height: 1.55;
+  color: var(--forest);
+  max-width: 46ch;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .owner-grid {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    margin-inline: auto;
+  }
+
+  .owner-card__media {
+    aspect-ratio: 4 / 3;
+  }
+
+  .owners__cta-strip {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.2rem;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .owner-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: none;
+  }
+
+  .owner-grid > .reveal:last-child {
+    grid-column: 1 / -1;
+    max-width: 480px;
+    margin-inline: auto;
+  }
+}
