@@ -2389,9 +2389,10 @@ p {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(1rem, 1.8vw, 1.5rem);
   margin-bottom: clamp(2.4rem, 4vw, 3.4rem);
+  align-items: start; /* cards stay top-aligned regardless of expanded state */
 }
 
-/* Card */
+/* Card shell */
 .owner-card {
   display: flex;
   flex-direction: column;
@@ -2403,7 +2404,7 @@ p {
 }
 
 .owner-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-5px);
   border-color: rgba(23, 77, 53, 0.24);
   box-shadow: var(--shadow-md);
 }
@@ -2411,7 +2412,7 @@ p {
 /* Photo */
 .owner-card__media {
   position: relative;
-  aspect-ratio: 3 / 3.5;
+  aspect-ratio: 4 / 4.2;
   overflow: hidden;
   background: var(--mist-soft);
   flex-shrink: 0;
@@ -2429,7 +2430,7 @@ p {
   transform: scale(1.05);
 }
 
-/* Role badge overlaid on the photo */
+/* Role badge overlaid on photo */
 .owner-card__role-badge {
   position: absolute;
   left: 0.9rem;
@@ -2458,40 +2459,62 @@ p {
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
-  flex: 1;
-  padding: 1.5rem 1.4rem 1.6rem;
+  padding: 1.4rem 1.35rem 1.35rem;
 }
 
 .owner-card__name {
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   color: var(--forest);
   line-height: 1.2;
 }
 
 .owner-card__quote {
   margin: 0;
-  padding: 0.8rem 1rem;
+  padding: 0.75rem 0.95rem;
   border-left: 3px solid var(--water);
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
   background: var(--mist-soft);
   font-family: var(--font-display);
   font-style: italic;
-  font-size: 0.95rem;
+  font-size: 0.93rem;
   line-height: 1.65;
   color: var(--forest);
+}
+
+/* ── Collapsible panel ─────────────────────────────────────────────────────── */
+.owner-card__expandable {
+  display: grid;
+  grid-template-rows: 0fr;        /* collapsed: zero height */
+  opacity: 0;
+  transition:
+    grid-template-rows 0.42s var(--ease),
+    opacity 0.35s var(--ease);
+  overflow: hidden;
+}
+
+.owner-card__expandable.is-expanded {
+  grid-template-rows: 1fr;        /* expanded: natural height */
+  opacity: 1;
+}
+
+/* Inner wrapper needed for grid-template-rows trick */
+.owner-card__expandable > div {
+  overflow: hidden;
+  padding-bottom: 0.1rem; /* avoids clipping last element's bottom */
 }
 
 .owner-card__story {
   display: grid;
   gap: 0.6rem;
+  padding-top: 0.1rem;           /* avoids content clipping at top during expand */
 }
 
-/* Highlight bullet list */
+/* Bullet highlights */
 .owner-card__highlights {
   display: grid;
   gap: 0.45rem;
-  margin-top: 0.3rem;
-  padding-top: 1rem;
+  margin-top: 0.9rem;
+  padding-top: 0.9rem;
   border-top: 1px solid var(--line);
 }
 
@@ -2515,7 +2538,45 @@ p {
   flex-shrink: 0;
 }
 
-/* CTA strip at the bottom of the section */
+/* ── Toggle button ─────────────────────────────────────────────────────────── */
+.owner-card__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  align-self: flex-start;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--emerald);
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: color 0.25s ease, gap 0.25s ease;
+}
+
+.owner-card__toggle:hover {
+  color: var(--forest);
+}
+
+.owner-card__toggle-icon {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--mist);
+  color: var(--emerald);
+  flex-shrink: 0;
+  transition: transform 0.38s var(--ease), background-color 0.25s ease;
+}
+
+.owner-card__toggle.is-open .owner-card__toggle-icon {
+  transform: rotate(90deg);
+  background: var(--mist);
+}
+
+/* ── CTA strip ─────────────────────────────────────────────────────────────── */
 .owners__cta-strip {
   display: flex;
   align-items: center;
@@ -2528,11 +2589,6 @@ p {
   border-radius: var(--radius-lg);
 }
 
-.owners__cta-left {
-  flex: 1;
-  min-width: 200px;
-}
-
 .owners__cta-text {
   font-family: var(--font-display);
   font-style: italic;
@@ -2540,18 +2596,16 @@ p {
   line-height: 1.55;
   color: var(--forest);
   max-width: 46ch;
+  flex: 1;
+  min-width: 200px;
 }
 
-/* Responsive */
-@media (max-width: 900px) {
+/* ── Responsive ────────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
   .owner-grid {
     grid-template-columns: 1fr;
     max-width: 480px;
     margin-inline: auto;
-  }
-
-  .owner-card__media {
-    aspect-ratio: 4 / 3;
   }
 
   .owners__cta-strip {
@@ -2564,7 +2618,6 @@ p {
 @media (min-width: 601px) and (max-width: 900px) {
   .owner-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    max-width: none;
   }
 
   .owner-grid > .reveal:last-child {
